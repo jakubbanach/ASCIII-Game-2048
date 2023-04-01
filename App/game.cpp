@@ -177,45 +177,62 @@ void tekst_punkty(){
 }
 
 void instrukcja(){
-    cout << "-----------------------------------------------------" << endl;
-    cout << "Poruszanie:" << endl;
-    cout << "w - elementy przesuwaja sie do gory" << endl;
-    cout << "s - elementy przesuwaja sie w dol" << endl;
-    cout << "a - elementy przesuwaja sie w lewo" << endl;
-    cout << "d - elementy przesuwaja sie w prawo\n" << endl;
-
+    cout << "------------------------------------------------------------" << endl;
+    cout << "|   Poruszanie:                                            |" << endl;
+    cout << "|     w - elementy przesuwaja sie do gory                  |" << endl;
+    cout << "|     s - elementy przesuwaja sie w dol                    |" << endl;
+    cout << "|     a - elementy przesuwaja sie w lewo                   |" << endl;
+    cout << "|     d - elementy przesuwaja sie w prawo                  |" << endl;
+    cout << "|                                                          |" << endl;
     //cout << "Aby uzyskac wiecej informacji o mechanice kliknij 'i'" << endl;
-    cout << "W kazdym momencie mozesz zakonczyc gre klikajac 'q'" << endl;
-    cout << "-----------------------------------------------------" << endl;
+    cout << "|   W kazdym momencie mozesz zakonczyc gre klikajac 'q'    |" << endl;
+    cout << "------------------------------------------------------------\n" << endl;
 }
 
 void ekran_startowy(){
-	cout << endl;
-	cout << "                   Gra 2048" << endl;
-	cout << "-----------------------------------------------------" << endl;
-	cout << "Aby rozpoczac gre wcisnij 'b'" << endl;
-	cout << "W kazdym momencie mozesz zakonczyc gre klikajac 'q'" << endl;
-    cout << "-----------------------------------------------------" << endl;
-    cout << "Wybierz przycisk: ";
+	cout << "\t----------------------------------------------------------" << endl;
+    cout << "\t|                                                        |" << endl;
+    cout << "\t|                       GRA 2048                         |" << endl;
+    cout << "\t|                                                        |" << endl;
+	cout << "\t----------------------------------------------------------" << endl;
+    cout << "\t|                                                        |" << endl;
+	cout << "\t|   Aby rozpoczac gre wcisnij 'b'                        |" << endl;
+	cout << "\t|   W kazdym momencie mozesz zakonczyc gre klikajac 'q'  |" << endl;
+    cout << "\t----------------------------------------------------------" << endl;
+    cout << endl;
+    cout << "   Wybierz przycisk: ";
 }
 
 void ekran_koncowy(){
-    cout << endl;
-	cout << "       KONIEC GRY" << endl;
-	cout << "--------------------------" << endl;
-	cout << "       TWOJ WYNIK" << endl;
-	cout << "          " << punkty << endl;
-	cout << "--------------------------" << endl;
-	cout << "       TWOJA TABLICA\n";
+    cout << "\t--------------------------" << endl;
+	cout << "\t|       KONIEC GRY       |" << endl;
+	cout << "\t--------------------------" << endl;
+	cout << "\t|       TWOJ WYNIK       |" << endl;
+	if(punkty<10)
+        cout << "\t|           " << punkty << "            |" << endl;
+    else if(punkty<100)
+        cout << "\t|           " << punkty << "           |" << endl;
+    else if(punkty<1000)
+        cout << "\t|          " << punkty << "           |" << endl;
+    else if(punkty<10000)
+        cout << "\t|          " << punkty << "          |" << endl;
+    else if(punkty<100000)
+        cout << "\t|         " << punkty << "          |" << endl;
+    else if(punkty<1000000)
+        cout << "\t|         " << punkty << "         |" << endl;
+    else
+        cout << "\t|         " << punkty << "        |" << endl;
+	cout << "\t--------------------------" << endl;
+	cout << "\t       TWOJA TABLICA\n\n";
 	wypisz_tablice();
-    cout << "--------------------------" << endl;
+    cout << "\t--------------------------" << endl;
 	//cout << endl;
-	cout << "Zespol:" << endl;
-	cout << "*Milena Smolka" << endl;
-	cout << "*Kaja Dzielnicka:" << endl;
-	cout << "*Kinga Wrona:" << endl;
-	cout << "*Jakub Banach:" << endl;
-	cout << "--------------------------" << endl;
+	cout << "\t| Zespol:                |" << endl;
+	cout << "\t|    *Milena Smolka      |" << endl;
+	cout << "\t|    *Kaja Dzielnicka    |" << endl;
+	cout << "\t|    *Kinga Wrona        |" << endl;
+	cout << "\t|    *Jakub Banach       |" << endl;
+	cout << "\t--------------------------" << endl;
 }
 
 void generator_liczb(){
@@ -465,13 +482,29 @@ void przesuwanie_dol(){
 }
 
 void wypisz_tablice(){
-    for ( int i = 0; i < ::size;  i++ )
+    for ( int i = 0; i < 4;  i++ )
     {
+        cout << "\t*************************" << endl;
         cout << "\t";
-        for ( int j = 0; j < ::size; j++ )
-            cout << game[i][j] << " ";
-        cout << endl;
+        for ( int j = 0; j < 4; j++ )
+        {
+            if(game[i][j]==0)
+                cout << "*     ";
+            else if(game[i][j]<10)
+                cout << "*  " << game[i][j] << "  ";
+            else if(game[i][j]<100)
+                cout << "*  " << game[i][j] << " ";
+            else if(game[i][j]<1000)
+                cout << "* " << game[i][j] << " ";
+            else if(game[i][j]<10000)
+                cout << "* " << game[i][j] << "";
+            else
+                cout << "*" << game[i][j] << "";
+        }
+        cout << "*" << endl;
     }
+    cout << "\t*************************" << endl;
+
 }
 
 void pusta_tablica(){
