@@ -4,7 +4,9 @@
 
 using namespace std;
 
-int game[4][4];
+const int size = 4;
+int game[::size][::size];
+// '::size' means that it refers to the global 'size' 
 int punkty = 0;
 char input;
 
@@ -121,30 +123,31 @@ int main()
 
 int czy_pusta_tablica(){
     int ilosc=0;
-    for ( int i = 0; i < 4;  i++ )
-        for ( int j = 0; j < 4; j++ )
+    for ( int i = 0; i < ::size;  i++ )
+        for ( int j = 0; j < ::size; j++ )
             if(game[i][j]!=0)
                 ilosc++;
-    if(ilosc==16)
+    if(ilosc==::size * ::size)
         return 1;
     return 0;
 }
 
 int sprawdzenie(){
-    int nowy[6][6]; //nowa tablica, powiekszona o rozmiar z kazdej strony
+    int MORE = ::size + 2;
+    int nowy[::size + 2][::size + 2]; //nowa tablica, powiekszona o rozmiar z kazdej strony
     int ilosc=0;
-    for ( int i = 0; i < 6;  i++ )
-        for ( int j = 0; j < 6; j++ )
+    for ( int i = 0; i < MORE;  i++ )
+        for ( int j = 0; j < MORE; j++ )
         {
-            if(j==0||j==5||i==0||i==5)
+            if(j==0||j==MORE-1||i==0||i==MORE-1)
                 nowy[i][j]=1;
             else
                 nowy[i][j]=game[i-1][j-1];
         }
 
-    for ( int i = 1; i < 5;  i++ )
+    for ( int i = 1; i < MORE-1;  i++ )
     {
-        for ( int j = 1; j < 5; j++ )
+        for ( int j = 1; j < MORE-1; j++ )
         {
             int ob=nowy[i][j];
             if(ob==0)
@@ -158,7 +161,7 @@ int sprawdzenie(){
                 ilosc++;
         }
     }
-    if(ilosc==16)
+    if(ilosc==::size * ::size)
         return 1;
     return 0;
 }
@@ -170,9 +173,7 @@ void tekst(){
 }
 
 void tekst_punkty(){
-
-    cout << endl;
-    cout << "Punkty: "<< punkty << endl;
+    cout << "\nPunkty: "<< punkty << endl;
 }
 
 void instrukcja(){
@@ -225,8 +226,8 @@ void generator_liczb(){
         int y = rand() %16;
 
     int where = 0;
-    for ( int i = 0; i < 4;  i++ )
-        for ( int j = 0; j < 4; j++ )
+    for ( int i = 0; i < ::size;  i++ )
+        for ( int j = 0; j < ::size; j++ )
         {
             if ( where == x || where == y )
             {
@@ -246,11 +247,11 @@ void generator_kolejnych_liczb(){
     {
         int x = rand() %16; //losuje miejsce dla liczby w tablicy dwuwymiarowej
         int where = 0;  //ustawia zmienna na wartosc poczatku tablicy
-        for ( int i = 0; i < 4;  i++ )
+        for ( int i = 0; i < ::size;  i++ )
         {
             if(pom!=1)
             {
-                for ( int j = 0; j < 4; j++ )
+                for ( int j = 0; j < ::size; j++ )
                 {
                     if ( where == x) // x zgadza sie z wybranym elementem
                     {
@@ -275,32 +276,34 @@ void generator_kolejnych_liczb(){
 }
 
 void przesuwanie_lewo(){
-    for(int i=0;i<4;i++)    //wykonuje petle po 4 wierszach
+    int SIZE = ::size;
+    for(int i=0;i< SIZE;i++)    //wykonuje petle po 4 wierszach
     {
         int j=1;
-        while(j<=3) //wykonuje petle po kolumnach
+        
+        while(j< SIZE) //wykonuje petle po kolumnach
         {
             int ilosc=j-1;
             int pom=game[i][j-1]; //wartosc pierwszego elementu, rozpoczynajacego sie od j-tej kolumny
 
-            while(pom==0&&ilosc<3) //wykonuje dopoki pierwszy element bedzie rozny od zera lub skonczy sie warunek gdy caly wiersz to zera
+            while(pom==0&&ilosc<SIZE-1) //wykonuje dopoki pierwszy element bedzie rozny od zera lub skonczy sie warunek gdy caly wiersz to zera
             {
-                for(int k=j;k<=3;k++)   //przesuwa elementy do lewej strony tablicy
+                for(int k=j;k<SIZE;k++)   //przesuwa elementy do lewej strony tablicy
                     game[i][k-1]=game[i][k];
 
-                game[i][3]=0;
+                game[i][SIZE-1]=0;
                 pom=game[i][j-1];   //przypisanie ponownej wartosci pierwszemu elementowi
                 ilosc++;
             }
 
             int ilosc2=j;
             int pom2=game[i][j]; //wartosc drugiego elementu, rozpoczynajacego sie od j-tej kolumny
-            while(pom2==0&&ilosc2<3) //wykonuje dopoki drugi element bedzie rozny od zera lub skonczy sie warunek gdy caly wiersz to zera
+            while(pom2==0&&ilosc2<SIZE-1) //wykonuje dopoki drugi element bedzie rozny od zera lub skonczy sie warunek gdy caly wiersz to zera
             {
-                for(int k=j;k<3;k++)
+                for(int k=j;k<SIZE-1;k++)
                     game[i][k]=game[i][k+1];    //przesuwa elementy do lewej strony tablicy
 
-                game[i][3]=0;
+                game[i][SIZE-1]=0;
                 pom2=game[i][j];
                 ilosc2++;
 
@@ -321,9 +324,10 @@ void przesuwanie_lewo(){
 }
 
 void przesuwanie_prawo(){
-    for(int i=0;i<4;i++)
+    int SIZE = ::size;
+    for(int i=0;i<SIZE;i++)
     {
-        int j=2;
+        int j=SIZE-2;
         while(j>=0)
         {
             int ilosc=j+1;
@@ -368,32 +372,33 @@ void przesuwanie_prawo(){
 }
 
 void przesuwanie_gora(){
-    for(int i=0;i<4;i++)    //wykonuje petle po 4 kolumnach
+    int SIZE = ::size;
+    for(int i=0;i<SIZE;i++)    //wykonuje petle po 4 kolumnach
     {
         int j=1;
-        while(j<=3) //wykonuje petle po wierszach
+        while(j<SIZE) //wykonuje petle po wierszach
         {
             int ilosc=j-1;
             int pom=game[j-1][i]; //wartosc pierwszego elementu, rozpoczynajacego sie od j-tego wiersza
 
-            while(pom==0&&ilosc<3) //wykonuje dopoki pierwszy element bedzie rozny od zera lub skonczy sie warunek gdy cala kolumna to zera
+            while(pom==0&&ilosc<SIZE-1) //wykonuje dopoki pierwszy element bedzie rozny od zera lub skonczy sie warunek gdy cala kolumna to zera
             {
-                for(int k=j;k<=3;k++)   //przesuwa elementy do gornej czesci tablicy
+                for(int k=j;k<SIZE;k++)   //przesuwa elementy do gornej czesci tablicy
                     game[k-1][i]=game[k][i];
 
-                game[3][i]=0;
+                game[SIZE-1][i]=0;
                 pom=game[j-1][i];   //przypisanie ponownej wartosci pierwszemu elementowi
                 ilosc++;
             }
 
             int ilosc2=j;
             int pom2=game[j][i]; //wartosc drugiego elementu, rozpoczynajacego sie od j-tego wiersza
-            while(pom2==0&&ilosc2<3)
+            while(pom2==0&&ilosc2<SIZE-1)
             {
-                for(int k=j;k<3;k++)    //wykonuje dopoki drugi element bedzie rozny od zera lub skonczy sie warunek gdy cala kolumna to zera
+                for(int k=j;k<SIZE-1;k++)    //wykonuje dopoki drugi element bedzie rozny od zera lub skonczy sie warunek gdy cala kolumna to zera
                     game[k][i]=game[k+1][i];    //przesuwa elementy do gornej strony tablicy
 
-                game[3][i]=0;
+                game[SIZE-1][i]=0;
                 pom2=game[j][i];
                 ilosc2++;
 
@@ -414,9 +419,10 @@ void przesuwanie_gora(){
 }
 
 void przesuwanie_dol(){
-    for(int i=0;i<4;i++)
+    int SIZE = ::size;
+    for(int i=0;i<SIZE;i++)
     {
-        int j=2;
+        int j=SIZE-2;
         while(j>=0)
         {
             int ilosc=j+1;
@@ -459,17 +465,17 @@ void przesuwanie_dol(){
 }
 
 void wypisz_tablice(){
-    for ( int i = 0; i < 4;  i++ )
+    for ( int i = 0; i < ::size;  i++ )
     {
         cout << "\t";
-        for ( int j = 0; j < 4; j++ )
+        for ( int j = 0; j < ::size; j++ )
             cout << game[i][j] << " ";
         cout << endl;
     }
 }
 
 void pusta_tablica(){
-    for ( int i = 0; i < 4;  i++ )
-        for ( int j = 0; j < 4; j++ )
+    for ( int i = 0; i < ::size;  i++ )
+        for ( int j = 0; j < ::size; j++ )
             game[i][j]=0;
 }
