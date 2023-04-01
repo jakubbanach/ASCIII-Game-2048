@@ -1,4 +1,4 @@
-# Game 2024
+# Game 2048
  Project created with group GitY on I semester 
 
 <img src="./images/logo.png" width=300> 
