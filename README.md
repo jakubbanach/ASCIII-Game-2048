@@ -1,7 +1,7 @@
 # Game 2024
  Project created with group GitY on I semester 
 
-<img src="./App/images/logo.png" width=300> 
+<img src="./images/logo.png" width=300> 
 
 ## Spis treści 
 
@@ -9,7 +9,7 @@
 
 * [Etapy pracy](#etapy-pracy) 
 
-* [Zdjęcia](#zdjęcia) 
+* [Wygląd aplikacji](#wyglad-aplikacji) 
 
 * [Udoskonalenia projektu](#udoskonalenia-projektu)  
 
@@ -28,9 +28,13 @@ Projekt powstał w ramach przedmiotu Narzędzia Informatyczne. Jego realizacja o
 - opracowanie warstwy graficznej 
 - faza testów 
 
-## Zdjęcia 
-Tu będziemy umieszczać zdjęcia ukazujące rozwój projektu 
-
+## Wygląd aplikacji 
+Początkowy ekran<br>
+<img src="./images/starting_screen.png">
+Wygląd gry<br>
+<img src="./images/game_view.png"> 
+Końcowy ekran<br>
+<img src="./images/ending_screen.png"> 
 
 ## Udoskonalenia projektu  
 W przyszłości przewidujemy pracę nad udoskonaleniem pewnych aspektów naszego projektu, m.in.: 
