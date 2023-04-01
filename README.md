@@ -30,11 +30,11 @@ Projekt powstał w ramach przedmiotu Narzędzia Informatyczne. Jego realizacja o
 
 ## Wygląd aplikacji 
 Początkowy ekran<br>
-<img src="./images/starting_screen.png">
+<img src="./images/starting_screen.png"><br>
 Wygląd gry<br>
-<img src="./images/game_view.png"> 
+<img src="./images/game_view.png"> <br>
 Końcowy ekran<br>
-<img src="./images/ending_screen.png"> 
+<img src="./images/ending_screen.png"> <br>
 
 ## Udoskonalenia projektu  
 W przyszłości przewidujemy pracę nad udoskonaleniem pewnych aspektów naszego projektu, m.in.: 
